@@ -1,0 +1,395 @@
+/* =1. TOPBAR (NAV) */
+/* ================================================= */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #9dd9eb; /* Corrigido: Removido o 'a' no final */
+    display: flex;
+    justify-content: space-between; /* Mantém os itens nos cantos opostos */
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Garante que o container de perfil/botão use flex */
+.direita-topbar {
+    display: flex; 
+    align-items: center; /* Alinha verticalmente */
+    padding: 10px;
+    padding-left: 20px;
+    gap: 10px; /* Espaçamento */
+    
+    /* === SUA SOLICITAÇÃO === */
+    order: 1; /* Joga o perfil para a esquerda (início) */
+}
+
+/* Estilos para o Link de Perfil (<a>) */
+.profile-link {
+    display: flex; 
+    flex-direction: column; /* Faz a imagem ficar acima do nome */
+    align-items: center; /* Centraliza */
+    text-decoration: none;
+    color: #000; 
+}
+
+/* Estilos para a Imagem dentro do link */
+.profile-link img.perfil {
+    width: 30px; 
+    height: 30px;
+    margin-bottom: 2px; 
+}
+
+/* Estilos para o Nome dentro do link */
+.profile-link p {
+    color: rgb(0, 0, 0); 
+    font-size: 12px; 
+    margin: 0;
+}
+
+.left-topbar{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    padding-right:20px;
+    /* margin-right: 1160px; REMOVIDO (quebrava o layout) */
+
+    /* === SUA SOLICITAÇÃO === */
+    order: 2; /* Joga o logo para a direita (fim) */
+}
+
+/* ================================================= */
+/* 2. SIDEBAR (LATERAL) */
+/* ================================================= */
+
+/* 1. Ajuste a classe principal da sidebar (Unificado) */
+.sidebar {
+    position: fixed;
+    top: 60px; /* mesma altura da topbar */
+    left: 0;
+    width: 240px;
+    height: calc(100vh - 60px);
+    background-color: #9dd9eb;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinha itens no topo */
+    padding-left: 0; 
+    padding-right: 0;
+}
+
+/* 2. Ajuste o container dos links (<ul>) (Unificado) */
+.sidebar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* 3. Estilo dos itens da lista (li) */
+.sidebar ul li {
+    margin-bottom: 5px; /* Espaço entre os itens do menu */
+}
+
+/* 4. Estilo dos Links (<a>) */
+.sidebar ul li a {
+    display: flex; 
+    align-items: center; 
+    padding: 10px 20px; 
+    text-decoration: none;
+    color: #385a64; 
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+/* 5. Efeito ao passar o mouse */
+.sidebar ul li a:hover {
+    background-color: #e9e9e9; 
+    border-radius: 18px; 
+}
+
+/* 6. Estilo para o item ATIVO (Dashboard, etc.) */
+.sidebar ul li a.active {
+    background-color: white; 
+    color: #000000; 
+    border-radius: 5px; 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+    /* CORREÇÃO: Removido 'margin: 0 10px;' para evitar que o link "pule" */
+}
+
+/* 7. Ajuste dos Ícones (Unificado) */
+.sidebar img {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px; /* Espaço entre o ícone e o texto */
+    padding: 0; /* Remove padding desnecessário */
+    vertical-align: middle; 
+}
+
+/* ================================================= */
+/* VARIÁVEIS DE CORES PARA A ÁREA BRANCA */
+/* ================================================= */
+:root {
+    --color-light-bg: #F5F5F5; 
+    --color-card-bg: #FFFFFF; 
+    --color-text-dark: #333333;
+    --color-text-light: #666666;
+    --color-border-light: #EEEEEE;
+    --color-active-blue: #2196F3;
+    --color-action-button-bg: #E3F2FD;
+    --color-success-green: #4CAF50; 
+    
+    --sidebar-width: 240px;
+    --topbar-height: 60px;
+}
+
+/* ================================================= */
+/* 1. POSICIONAMENTO DA ÁREA PRINCIPAL (MAIN) */
+/* ================================================= */
+body {
+    padding-top: var(--topbar-height); 
+    padding-left: var(--sidebar-width); 
+    background-color: var(--color-light-bg);
+    display: block; 
+    font-family: Arial, sans-serif; /* Adicionado para consistência */
+}
+
+main {
+    flex-grow: 1; 
+    padding: 30px; 
+}
+
+/* Título principal "Relatórios" */
+main > h2 {
+    font-size: 1.8em;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-bottom: 25px;
+}
+
+/* ================================================= */
+/* 2. CONTROLES (Busca e Botão "Gerar novo") */
+/* ================================================= */
+
+.report-controls {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+/* Campo de Busca */
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border-light);
+    border-radius: 5px;
+    padding: 8px 10px;
+    width: 250px; 
+}
+
+.search-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    opacity: 0.6;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    font-size: 0.9em;
+    color: var(--color-text-dark);
+    background-color: transparent; /* Garante fundo branco */
+}
+
+/* Botão "Gerar novo" */
+.action-button.primary {
+    background-color: var(--color-action-button-bg);
+    color: var(--color-active-blue);
+    border: 1px solid var(--color-active-blue);
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.action-button.primary:hover {
+    background-color: var(--color-active-blue);
+    color: var(--color-card-bg);
+}
+
+/* ================================================= */
+/* 3. TABELA DE DADOS (LISTA DE PACIENTES) */
+/* ================================================= */
+
+.data-table-container {
+    background-color: var(--color-card-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-border-light);
+    overflow: hidden; 
+    margin-bottom: 40px;
+}
+
+/* Estrutura de Grid para a Tabela */
+.table-header,
+.table-row {
+    display: grid;
+    /* Colunas: Nome, Especie, Idade, Responsável, Ação */
+    grid-template-columns: 2fr 1.5fr 1fr 2fr 1fr; 
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--color-border-light); 
+    align-items: center;
+}
+
+/* Estilo do Cabeçalho da Tabela */
+.table-header {
+    background-color: var(--color-card-bg); 
+    color: var(--color-text-dark);
+    font-weight: 600;
+    font-size: 0.95em;
+    border-bottom: 2px solid var(--color-border-light);
+}
+
+/* Adiciona a borda vertical à direita de cada coluna (célula) */
+.table-header .column,
+.table-row .column {
+    border-right: 1px solid var(--color-border-light); 
+    padding-right: 20px; 
+}
+
+/* Remove a borda vertical da última coluna */
+.table-header .column:last-child,
+.table-row .column:last-child {
+    border-right: none;
+    padding-right: 0;
+}
+
+.data-table-container .table-row:last-child {
+    border-bottom: none;
+}
+
+/* Estilo das Linhas de Dados */
+.table-row {
+    color: var(--color-text-dark);
+    font-size: 0.9em;
+}
+
+/* Botão "Editar" */
+.edit-button {
+    background-color: transparent;
+    color: var(--color-success-green);
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.edit-button:hover {
+    background-color: rgba(76, 175, 80, 0.1); 
+}
+
+/* ================================================= */
+/* 4. GRÁFICOS (Consultas este mês) */
+/* ================================================= */
+
+.chart-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-bottom: 15px;
+}
+
+.charts-container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.chart-card {
+    background-color: var(--color-card-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-border-light);
+    padding: 20px;
+    min-height: 250px;
+    flex: 1; /* Faz os dois gráficos dividirem o espaço */
+    
+    /* Centraliza o placeholder */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-placeholder {
+    color: var(--color-text-light);
+    font-style: italic;
+    font-size: 0.9em;
+}
+/* ================================================= */
+/* 5. TABELA HTML PADRÃO (Estilo Geral) */
+/* ================================================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-top: 20px;
+    font-size: 0.95em;
+}
+
+/* Cabeçalho da Tabela */
+thead {
+    background-color: var(--color-action-button-bg);
+}
+
+thead th {
+    padding: 15px 20px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    border-bottom: 2px solid var(--color-border-light);
+}
+
+/* Linhas da Tabela */
+tbody tr {
+    border-bottom: 1px solid var(--color-border-light);
+    transition: background-color 0.2s;
+}
+
+tbody tr:hover {
+    background-color: #f1faff;
+}
+
+/* Células da Tabela */
+td {
+    padding: 12px 20px;
+    color: var(--color-text-dark);
+}
+
+/* Células do Cabeçalho */
+th {
+    background-color: #e3f2fd;
+}
+
+/* Última linha sem borda inferior */
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Alinhamento de colunas específicas (opcional) */
+td:nth-child(4), th:nth-child(4) {
+    text-align: center;
+}

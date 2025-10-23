@@ -1,0 +1,182 @@
+/* Importa os estilos base (sidebar, topbar, etc) do seu arquivo principal */
+@import url('Gerentefunc.css');
+
+/* ================================================= */
+/* VARIÁVEIS DE CORES E DIMENSÕES */
+/* ================================================= */
+:root {
+    --color-light-bg: #F5F5F5; 
+    --color-card-bg: #FFFFFF; 
+    --color-text-dark: #333333;
+    --color-text-light: #666666;
+    --color-border-light: #EEEEEE;
+    --color-active-blue: #2196F3;
+}
+
+/* ================================================= */
+/* 1. ÁREA PRINCIPAL DE CONTEÚDO (main) */
+/* ================================================= */
+.main-content {
+    flex: 1; /* Ocupa o espaço restante */
+    background-color: #FFFFFF;
+    margin: 20px;
+    border-radius: 20px;
+    padding: 30px 40px;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.main-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.user-profile .icon {
+    font-size: 32px;
+    color: #4B5563;
+    cursor: pointer;
+}
+
+.page-content h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 25px;
+}
+
+/* --- Barra de Busca --- */
+.search-bar {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.search-bar .icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9CA3AF; /* Cor do ícone de busca */
+}
+
+.search-bar input {
+    width: 350px;
+    padding: 12px 12px 12px 45px; /* Espaço para o ícone */
+    border-radius: 8px;
+    border: 1px solid #E5E7EB; /* Borda cinza clara */
+    background-color: #F9FAFB; /* Fundo cinza bem claro */
+    font-size: 15px;
+}
+
+.search-bar input::placeholder {
+    color: #9CA3AF;
+}
+
+/* --- Calendário --- */
+.calendar-container {
+    width: 100%;
+}
+
+.calendar-container h2 {
+    font-size: 30px;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px; /* Isso cria o espaçamento branco entre os dias */
+    background-color: #FFFFFF; /* Garante que o gap seja branco */
+}
+
+.day {
+    background-color: #F3F4F6; /* Cor de fundo padrão dos dias */
+    border-radius: 8px;
+    padding: 10px;
+    min-height: 90px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1F2937;
+    text-align: left;
+    border: 1px solid; /* Borda transparente para manter o layout */
+    /* Adiciona transição para suavizar mudanças de cor */
+    transition: background-color 0.3s; 
+}
+
+/* Classe especial para o primeiro dia do mês (1 de Out de 2025 é uma Quarta-feira) */
+/* Assumindo que a semana começa na Segunda (Col 1), Quarta é Col 3 */
+.day.first-day {
+    grid-column-start: 3;
+}
+
+/* --- Destaques dos Dias --- */
+
+/* Destaque Azul (sutil) */
+.day.highlight-blue {
+    background-color: #bfd9eb; /* Azul bem claro */
+}
+
+/* Destaque Amarelo (forte) */
+.day.highlight-yellow {
+    background-color: #bfd9eb; /* Amarelo da imagem */
+    font-weight: 700; /* Texto em negrito como na imagem */
+    color: #1F2937;
+}
+
+/* ================================================= */
+/* 4. CARD DE DETALHES DO DIA (POP-UP)               */
+/* ================================================= */
+
+.day-details-card {
+    position: absolute; /* Posicionamento relativo ao .main-content */
+    width: 280px;
+    background-color: var(--color-card-bg, #fff);
+    border: 1px solid var(--color-border-light, #eee);
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    transform: scale(0.95);
+    opacity: 0;
+}
+
+.day-details-card:not(.hidden) {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.day-details-card.hidden {
+    display: none;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--color-border-light, #eee);
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.card-header button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--color-text-light, #666);
+}
+
+.card-appointments {
+    padding: 15px;
+    font-size: 14px;
+    color: var(--color-text-dark, #333);
+}

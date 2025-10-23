@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+
+<head>
+    
+    <link rel="stylesheet" href="Gerenteag.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerente</title>
+</head>
+
+<body>
+
+    <nav>
+        <div class="direita-topbar">
+        <a href="index.html "class="logo">
+            <img class="logo" src="img/Rectangle.png" alt="" width="100px" height="70px">
+        </a>
+        </div>
+       <div class="left-topbar">
+    
+    <a href="index.html" class="profile-link">
+        
+        <img class="perfil" src="img/Male User.png" alt="Perfil" width="50px" height="50px">
+        
+     
+    </a>
+    
+
+    
+</div>
+</nav>
+    <nav class="sidebar">
+        <ul>
+           <li><a href="Gerente.html"> <img src="img/Performance Macbook.png"  alt="" height=""  width="">Dashbord</a></li>
+            <li><a href="Gerentefunc.html"><img src="img/Management.png"  alt="" height=""  width="">Funcionario</a></li>
+            <li><a href="Gerenteag.html"><img src="img/calendario (2) 1.png"  alt="" height=""  width="">Agenda</a></li>
+            <li><a href="Gerenterel.html"><img src="img/Business Report.png"  alt="" height=""  width="">Relatórios</a></li>
+        </ul>
+    </nav>
+
+   <main class="main-content">
+        
+
+        <section class="page-content">
+            <h1>Agendamento</h1>
+
+            <div class="search-bar">
+                <span class="icon material-symbols-outlined"></span>
+                <input type="text" placeholder="Buscar..">
+            </div>
+
+            <div class="calendar-container">
+                <h2>OUTUBRO 2025</h2>
+
+                <div class="calendar-grid">
+                    <div class="day first-day highlight-blue">1</div>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day highlight-blue">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    <div class="day highlight-yellow">13</div>
+                    <div class="day highlight-yellow">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day highlight-blue">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day highlight-blue">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">25</div>
+                    <div class="day">26</div>
+                    <div class="day">27</div>
+                    <div class="day">28</div>
+                    <div class="day">29</div>
+                    <div class="day">30</div>
+                    <div class="day">31</div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+    
+    <!-- Card de detalhes do dia (inicialmente oculto) -->
+    <div id="day-details-card" class="day-details-card hidden">
+        <div class="card-header">
+            <h3 id="card-date"></h3>
+            <button id="close-card-btn">&times;</button>
+        </div>
+        <div id="card-appointments" class="card-appointments">
+            <!-- As consultas serão inseridas aqui pelo JS -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const calendarGrid = document.querySelector('.calendar-grid');
+            const detailsCard = document.getElementById('day-details-card');
+            const cardDate = document.getElementById('card-date');
+            const cardAppointments = document.getElementById('card-appointments');
+            const closeCardBtn = document.getElementById('close-card-btn');
+
+            // Dados de exemplo (mock) para as consultas
+            const appointments = {
+                1: "Nenhuma consulta agendada.",
+                5: "10:00 - Consulta com Dr. House (Tosa de rotina - Rex)",
+                13: "09:00 - Vacinação (Bolinha)<br>14:00 - Cirurgia (Frajola)",
+                14: "11:30 - Retorno (Princesa)",
+                17: "16:00 - Exame de sangue (Max)",
+                21: "08:00 - Consulta de emergência (Thor)"
+            };
+
+            // Função para mostrar o card de detalhes
+            function showDetailsCard(dayElement) {
+                const dayNumber = dayElement.textContent.trim();
+                const dayRect = dayElement.getBoundingClientRect();
+                const mainContentRect = document.querySelector('.main-content').getBoundingClientRect();
+
+                // Define o conteúdo do card
+                cardDate.textContent = `Consultas do dia ${dayNumber} de Outubro`;
+                cardAppointments.innerHTML = appointments[dayNumber] || "Nenhuma consulta agendada.";
+
+                // Posiciona o card ao lado do dia clicado
+                // O posicionamento é relativo ao '.main-content' que tem 'position: relative'
+                const top = dayRect.top - mainContentRect.top;
+                const left = dayRect.right - mainContentRect.left + 15; // 15px de espaço
+
+                detailsCard.style.top = `${top}px`;
+                detailsCard.style.left = `${left}px`;
+
+                // Mostra o card
+                detailsCard.classList.remove('hidden');
+            }
+
+            // Função para esconder o card
+            function hideDetailsCard() {
+                detailsCard.classList.add('hidden');
+            }
+
+            // Adiciona o listener de evento ao grid do calendário (event delegation)
+            calendarGrid.addEventListener('click', function (event) {
+                // Verifica se o clique foi em um elemento com a classe 'day'
+                const dayElement = event.target.closest('.day');
+                if (dayElement) {
+                    showDetailsCard(dayElement);
+                }
+            });
+
+            // Listener para o botão de fechar
+            closeCardBtn.addEventListener('click', hideDetailsCard);
+
+            // Listener para fechar o card se clicar fora dele
+            document.addEventListener('click', function (event) {
+                // Se o clique não foi dentro do card E não foi em um dia do calendário
+                if (!detailsCard.contains(event.target) && !event.target.closest('.day')) {
+                    hideDetailsCard();
+                }
+            });
+
+            // --- Script para o menu lateral ---
+            // Este script cuida da seleção do item "ativo" na barra lateral
+            const navLinks = document.querySelectorAll('.sidebar a');
+            const currentPage = window.location.pathname.split('/').pop();
+
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href').split('/').pop();
+                if (linkPage === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,339 @@
+@import url('Gerentefunc.css');
+:root {
+    /* Cores do Projeto */
+    --color-sidebar-bg: #9dd9eb;
+    --color-light-bg: #F5F5F5; 
+    --color-card-bg: #FFFFFF; 
+    --color-text-dark: #333333;
+    --color-text-light: #666666;
+    --color-border-light: #EEEEEE;
+    --color-active-blue: #2196F3;
+    --color-action-button-bg: #E3F2FD;
+    --color-success-green: #4CAF50; 
+    --color-sidebar-link: #385a64;
+
+    /* Dimensões Fixas */
+    --sidebar-width: 240px;
+    --topbar-height: 60px;
+}
+
+
+/* ================================================= */
+/* 3. ÁREA PRINCIPAL DE CONTEÚDO (main) - PARTE BRANCA */
+/* ================================================= */
+main {
+    flex-grow: 1; 
+    padding: 30px; 
+}
+
+/* Título principal "Relatórios" */
+main > h2 {
+    font-size: 1.8em;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-bottom: 25px;
+}
+
+/* CONTROLES (Busca e Botão) */
+.report-controls {
+    display: flex;
+    /* Muda para 'column' em telas pequenas (ver @media) */
+    flex-direction: row; 
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 15px; /* Espaçamento entre busca e botão */
+}
+
+/* CAMPO DE BUSCA */
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-card-bg); /* Fundo BRANCO */
+    border: 1px solid var(--color-border-light);
+    border-radius: 5px;
+    padding: 5px 10px; 
+    width: 250px; 
+    height: 35px; /* Altura fixa para alinhar com o botão */
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    font-size: 0.9em;
+    color: var(--color-text-dark);
+    background-color: transparent; 
+    height: 100%;
+}
+
+/* Botão "Gerar novo" */
+.action-button.primary {
+    background-color: var(--color-action-button-bg);
+    color: var(--color-active-blue);
+    border: 1px solid var(--color-active-blue);
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    height: 35px; /* Altura fixa */
+}
+
+.action-button.primary:hover,
+.action-button.primary:focus {
+    background-color: var(--color-active-blue);
+    color: white;
+}
+
+/* ================================================= */
+/* 4. TABELA DE DADOS (RELATÓRIOS) */
+/* ================================================= */
+
+.data-table-container {
+    background-color: var(--color-card-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-border-light);
+    overflow: hidden; 
+    margin-bottom: 40px;
+}
+/* Estilo para tabelas padrão (se não usar a versão com grid) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+}
+
+thead th {
+    background-color: #f8f9fa;
+    padding: 15px 20px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    border-bottom: 2px solid var(--color-border-light);
+}
+
+tbody td {
+    padding: 15px 20px;
+    color: var(--color-text-dark);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: #f1faff;
+}
+
+
+/* As classes abaixo são para uma tabela customizada com GRID.
+   Se estiver usando <table>, elas não serão aplicadas. */
+
+/* Garante o display: grid para o alinhamento das colunas */
+.table-header,
+.table-row {
+    display: grid;
+    /* Ajuste o 'grid-template-columns' conforme suas colunas */
+    grid-template-columns: 2fr 1.5fr 1fr 2fr 1fr; 
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--color-border-light); 
+    align-items: center;
+}
+
+/* Estilo do Cabeçalho da Tabela */
+.table-header {
+    font-weight: 600;
+    font-size: 0.95em;
+    border-bottom: 2px solid var(--color-border-light);
+}
+
+/* BORDA VERTICAL entre as colunas */
+.table-header .column,
+.table-row .column {
+    border-right: 1px solid var(--color-border-light); 
+    padding-right: 20px; 
+    /* Evita que o conteúdo cole na borda */
+    padding-left: 10px; 
+}
+/* Alinha a primeira coluna à esquerda */
+.table-header .column:first-child,
+.table-row .column:first-child {
+    padding-left: 0;
+}
+
+
+/* Remove a borda vertical da última coluna */
+.table-header .column:last-child,
+.table-row .column:last-child {
+    border-right: none;
+    padding-right: 0;
+}
+
+/* Remove a borda horizontal da última linha da tabela */
+.data-table-container .table-row:last-child {
+    border-bottom: none;
+}
+
+/* Botão "Editar" */
+.edit-button {
+    background-color: transparent;
+    color: var(--color-success-green);
+    border: 1px solid var(--color-success-green);
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.edit-button:hover,
+.edit-button:focus {
+    background-color: var(--color-success-green);
+    color: white;
+}
+
+/* ================================================= */
+/* 5. GRÁFICOS */
+/* ================================================= */
+
+.chart-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-bottom: 15px;
+}
+
+.charts-container {
+    display: flex;
+    flex-direction: row; /* Muda para 'column' em telas pequenas */
+    gap: 20px;
+    width: 100%;
+}
+
+.chart-card {
+    background-color: var(--color-card-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-border-light);
+    padding: 20px;
+    min-height: 250px;
+    flex: 1; /* Faz com que dividam o espaço igualmente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-card p {
+    color: var(--color-text-light);
+    font-style: italic;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+/* ================================================= */
+/* 6. RESPONSIVIDADE (Telas pequenas <= 768px) */
+/* ================================================= */
+@media (max-width: 768px) {
+
+    body {
+        /* Remove o padding fixo da sidebar */
+        padding-left: 0; 
+    }
+
+    .sidebar {
+        /* Esconde a sidebar fora da tela */
+        transform: translateX(-100%);
+        width: 0; /* Oculta completamente */
+        /* Você precisará de JavaScript para adicionar uma classe 
+           'sidebar.open { transform: translateX(0); width: var(--sidebar-width); }' 
+           ao clicar em um botão "hamburger" (não incluído) */
+    }
+
+    main {
+        /* Reduz o padding em telas menores */
+        padding: 15px; 
+    }
+    
+    main > h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    /* Empilha o campo de busca e o botão */
+    .report-controls {
+        flex-direction: column;
+        align-items: stretch; /* Faz ambos ocuparem 100% da largura */
+    }
+    
+    .search-box {
+        width: 100%; /* Ocupa a largura total */
+    }
+    
+    .action-button.primary {
+        width: 100%;
+    }
+
+    /* Empilha os gráficos */
+    .charts-container {
+        flex-direction: column;
+    }
+
+    /* --- AJUSTE RESPONSIVO DA TABELA --- */
+    
+    .data-table-container {
+        border: none;
+        box-shadow: none;
+    }
+
+    /* 1. Esconde o cabeçalho fixo */
+    .table-header {
+        display: none;
+    }
+
+    /* 2. Transforma cada linha em um "card" */
+    .table-row {
+        display: block; /* Empilha as colunas */
+        grid-template-columns: none; /* Reseta o grid */
+        border: 1px solid var(--color-border-light);
+        border-radius: 8px;
+        margin-bottom: 15px;
+        padding: 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* 3. Estiliza cada célula (coluna) */
+    .table-row .column {
+        display: block;
+        width: 100%;
+        padding: 10px 15px;
+        border-right: none;
+        /* Cria uma linha entre as células */
+        border-bottom: 1px dashed var(--color-border-light); 
+    }
+
+    /* 4. Remove a borda da última célula */
+    .table-row .column:last-child {
+        border-bottom: none;
+    }
+
+    /* 5. (REQUER HTML) Adiciona os labels antes do conteúdo */
+    /*
+       NO SEU HTML, adicione data-label nas colunas:
+       <div class="column" data-label="Nome">Relatório Mensal</div>
+       <div class="column" data-label="Data">20/10/2025</div>
+    */
+    .table-row .column::before {
+        content: attr(data-label); /* Pega o texto do 'data-label' */
+        display: block;
+        font-weight: 600;
+        color: var(--color-text-dark);
+        font-size: 0.8em;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+    }
+
+}
